@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Master Share API | Universal Product Sharing for Modern CMS</title>
+    <meta name="description" content="Master Share API allows WordPress, Wix, and Shopify stores to share specific products directly to social media and customers with a single line of code. Built by Mainadev of IBConcept.">
+    <meta name="keywords" content="Master Share API, Mainadev, IBConcept, product sharing, social media management, ecommerce api, wordpress share plugin, wix integration">
+    <meta name="author" content="Mainadev (IBConcept)">
+
+    <!-- SEO / SXO / AEO / GEO Optimizations -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Master Share API - One Link, Global Share">
+    <meta property="og:description" content="The bridge between your product and your customer's social feed. Zero friction, high conversion.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&h=630&auto=format&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- JSON-LD Schema (AIO/GEO/AEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Master Share API",
+      "operatingSystem": "All",
+      "applicationCategory": "BusinessApplication",
+      "author": {
+        "@type": "Person",
+        "name": "Mainadev",
+        "memberOf": {
+          "@type": "Organization",
+          "name": "IBConcept"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "An API focus on sharing specific products to customers across social networks without manual uploads."
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --accent: #f43f5e;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --nav-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            height: var(--nav-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: calc(var(--nav-height) + 80px) 0 100px;
+            text-align: center;
+            background: radial-gradient(circle at top center, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 99px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s, background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Integrations / CMS Grid */
+        .cms-section {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .cms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 40px;
+            opacity: 0.6;
+            margin-top: 40px;
+        }
+
+        .cms-item {
+            font-weight: 700;
+            color: var(--text-dim);
+        }
+
+        /* Features */
+        .features {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: border-color 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        /* Code Snippet Example */
+        .code-preview {
+            background: #000;
+            padding: 24px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            text-align: left;
+            margin-top: 40px;
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 40px;
+            background: #070c18;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h2 {
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            color: var(--text-dim);
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            text-decoration: none;
+            color: var(--text-dim);
+            transition: color 0.3s;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-dim);
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .hero h1 { font-size: 2.8rem; }
+            .cta-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container" style="display:flex; justify-content:space-between; width:100%; align-items:center;">
+            <div class="logo">
+                <i data-lucide="share-2"></i> Master Share
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#cms">CMS Partners</a>
+                <a href="#developers">Developers</a>
+                <a href="#pitch" class="btn btn-outline" style="padding: 8px 16px;">The Pitch</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Built by Mainadev of IBConcept</span>
+            <h1>One API. Any Store. <br><span style="color:var(--primary)">Unlimited Sharing.</span></h1>
+            <p>Stop uploading raw images to social managers. Use Master Share API to inject specific product intelligence into your social workflows and static pages instantly.</p>
+            
+            <div class="cta-group">
+                <a href="#" class="btn btn-primary">Start Sharing Free <i data-lucide="arrow-right"></i></a>
+                <a href="#features" class="btn btn-outline">See How It Works</a>
+            </div>
+
+            <div class="code-preview">
+                <span style="color: #6edcff;">&lt;script</span> <span style="color: #9d7cff;">src</span>=<span style="color: #7ef29d;">"https://cdn.mastershare.api/v1/mainadev.js"</span><span style="color: #6edcff;">&gt;&lt;/script&gt;</span><br>
+                <span style="color: #6edcff;">&lt;button</span> <span style="color: #9d7cff;">class</span>=<span style="color: #7ef29d;">"share-product"</span> <span style="color: #9d7cff;">data-id</span>=<span style="color: #7ef29d;">"car-123"</span><span style="color: #6edcff;">&gt;</span>Share This Car<span style="color: #6edcff;">&lt;/button&gt;</span>
+            </div>
+        </div>
+    </header>
+
+    <section id="cms" class="cms-section">
+        <div class="container">
+            <p style="color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-size: 0.75rem;">Works with your favorite platforms</p>
+            <div class="cms-grid">
+                <div class="cms-item">WordPress</div>
+                <div class="cms-item">Wix</div>
+                <div class="cms-item">Squarespace</div>
+                <div class="cms-item">Shopify</div>
+                <div class="cms-item">OpenCart</div>
+                <div class="cms-item">Joomla</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Master Share API?</h2>
+                <p>Designed for the "Specific Product" era of digital marketing.</p>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="zap"></i></div>
+                    <h3>Static Page Injection</h3>
+                    <p>Add a simple CDN link to any static head. Your site now has a dynamic "Share" class that pulls real-time product data.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="layers"></i></div>
+                    <h3>Universal CMS Logic</h3>
+                    <p>Whether it's Drupal, Wix, or a custom build, our API normalizes product objects so they look perfect on Instagram, X, or LinkedIn.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="megaphone"></i></div>
+                    <h3>Product-First Sharing</h3>
+                    <p>Don't share a homepage. Share the 2024 Sedan with the specific price and color pre-loaded. High intent, zero friction.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo" style="margin-bottom: 20px;"><i data-lucide="share-2"></i> Master Share</div>
+                    <p>A professional sharing solution for global ecommerce. Developed with passion by <strong>Mainadev</strong> at <strong>IBConcept</strong>.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Keys</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About IBConcept</a></li>
+                        <li><a href="#">Mainadev Portfolio</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Master Share API. Site developed by <strong>Mainadev</strong>.</p>
+                <div style="display:flex; gap: 20px;">
+                    <a href="#" style="color:var(--text-dim)"><i data-lucide="twitter"></i></a>
+                    <a href="#" style="color:var(--text-dim)"><i data-lucide="github"></i></a>
+                    <a href="#" style="color:var(--text-dim)"><i data-lucide="linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Basic Scroll Effect for Nav
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(15, 23, 42, 0.95)';
+                nav.style.padding = '5px 0';
+            } else {
+                nav.style.background = 'rgba(15, 23, 42, 0.8)';
+                nav.style.padding = '0';
+            }
+        });
+    </script>
+</body>
+</html>
